@@ -1,4 +1,3 @@
-
 <?php
 // Database credentials
 $servername = "localhost";
@@ -8,7 +7,7 @@ $dbname = "i6990943_wp2";
 $table = "ChatBotFields";
 
 // Establish database connection
-$conn = new mysqli($servername, $username, $password, $dbname,$table);
+$conn = new mysqli($servername, $username, $password, $dbname,$table); //Quitar el table en dado caso
 
 // Check connection
 if ($conn->connect_error) {
@@ -22,18 +21,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $correo = $_POST["correo"];
     $telefono = $_POST["telefono"];
 
+    // Prepare the SQL query (Note: Using prepared statements is recommended for security)
+    $sql = "INSERT INTO $table (nombre, correo, telefono) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sss", $nombre, $correo, $telefono);
 
-
-    // Preparar la consulta SQL
-    $sql = "INSERT INTO chatbotfields (nombre, correo, telefono) VALUES ('$nombre', '$correo', '$telefono')";
-
-    if ($conn->query($sql) === TRUE) {
+    if ($stmt->execute()) {
         echo "Datos guardados correctamente.";
     } else {
         echo "Error al guardar los datos: " . $conn->error;
     }
 
-    // Close the database connection
+    // Close the prepared statement and the database connection
+    $stmt->close();
     $conn->close();
 } else {
     // If the form was not submitted via POST, return an error response
