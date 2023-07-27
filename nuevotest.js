@@ -101,7 +101,14 @@ function goToNextQuestion() {
   currentQuestionIndex++;
   showNextQuestion();
 }
-
+function closeChatIfClickedOutside(event) {
+  // Verificar si el clic se hizo fuera del contenedor del chat
+  if (!formContainer.contains(event.target) && event.target !== botonChat) {
+    formContainer.classList.add('hidden'); // Ocultar el chat
+    // Aquí también puedes realizar otras acciones si deseas hacer algo más cuando se cierra el chat al hacer clic fuera de él
+  }
+}
+document.addEventListener('click', closeChatIfClickedOutside);
 nextQuestionButton.addEventListener('click', goToNextQuestion);
 
 responsesInput.addEventListener('keydown', (event) => {
