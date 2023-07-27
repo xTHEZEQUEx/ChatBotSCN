@@ -5,13 +5,8 @@ const emailInput = document.getElementById('email');
 const phoneInput = document.getElementById('phone');
 const nextQuestionButton = document.getElementById('nextQuestionButton');
 const submitButton = document.getElementById('submitButton');
-
-
 const formContainer = document.querySelector('.contenedorChat');
 const botonChat = document.getElementById('botonChat');
-
-
-
 const questions = [
   { header: ' Escribe tu nombre 👤:', input: nameInput },
   { header: ' Escribe tu correo 📧:', input: emailInput },
@@ -23,6 +18,8 @@ const respuestasUsuario = {
   phone: ''
 }
 let currentQuestionIndex = 0;
+
+
 
 botonChat.addEventListener('click', () => {
   formContainer.classList.toggle('hidden');
