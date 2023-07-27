@@ -1,25 +1,24 @@
 const questionHeader = document.getElementById('questionHeader');
 const responsesInput = document.getElementById('responses');
-const nameInput = document.getElementById('name');
-const emailInput = document.getElementById('email');
-const phoneInput = document.getElementById('phone');
+const nameInput = document.getElementById('nombre');
+const emailInput = document.getElementById('correo');
+const phoneInput = document.getElementById('telefono');
 const nextQuestionButton = document.getElementById('nextQuestionButton');
 const submitButton = document.getElementById('submitButton');
 const formContainer = document.querySelector('.contenedorChat');
 const botonChat = document.getElementById('botonChat');
+
 const questions = [
   { header: ' Escribe tu nombre 👤:', input: nameInput },
   { header: ' Escribe tu correo 📧:', input: emailInput },
   { header: ' Escribe tu número telefónico 📞:', input: phoneInput }
 ];
 const respuestasUsuario = {
-  name: '',
-  email: '',
-  phone: ''
+  nombre: '',
+  correo: '',
+  telefono: ''
 }
 let currentQuestionIndex = 0;
-
-
 
 botonChat.addEventListener('click', () => {
   formContainer.classList.toggle('hidden');
@@ -29,11 +28,11 @@ function storeUserResponses() {
   const emailResponse = emailInput.value.trim();
   const phoneResponse = phoneInput.value.trim();
 
-  respuestasUsuario.name = nameResponse;
-  respuestasUsuario.email = emailResponse;
-  respuestasUsuario.phone = phoneResponse;
+  respuestasUsuario.nombre = nameResponse;
+  respuestasUsuario.correo = emailResponse;
+  respuestasUsuario.telefono = phoneResponse;
 
-  console.log('Respuestas del usuario:', 'Nombre: ', respuestasUsuario.name, 'Correo: ', respuestasUsuario.email, 'Teléfono: ', respuestasUsuario.phone);
+  console.log('Respuestas del usuario:', 'Nombre: ', respuestasUsuario.nombre, 'Correo: ', respuestasUsuario.correo, 'Teléfono: ', respuestasUsuario.telefono);
 }
 
 function showNextQuestion() {
@@ -60,7 +59,40 @@ function showNextQuestion() {
     questions[currentQuestionIndex - 1].input.classList.remove('show');
     storeUserResponses()
   }
+  const finalMessageShown = document.getElementById('questionHeader').innerText === 'Gracias, nos pondremos en contacto contigo.😊';
+
+  // Si se ha mostrado el mensaje final, enviar el formulario
+  if (finalMessageShown) {
+    // const form = document.getElementById('miFormulario');
+    // form.submit(); // Enviar el formulario de manera programática
+    const nameResponse = nameInput.value.trim();
+    const emailResponse = emailInput.value.trim();
+    const phoneResponse = phoneInput.value.trim();
+
+    const formData = new FormData();
+    formData.append('nombre', nameResponse);
+    formData.append('correo', emailResponse);
+    formData.append('telefono', phoneResponse);
+
+    fetch('process_data.php', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('Formulario enviado correctamente.');
+        // Aquí puedes realizar acciones adicionales si el envío del formulario fue exitoso
+      } else {
+        console.error('Error al enviar el formulario:', response.statusText);
+        // Aquí puedes manejar errores si el envío del formulario falló
+      }
+    })
+    .catch(error => console.error('Error al enviar el formulario: ', error));
+  }
 }
+
+  
+
 
 
 function goToNextQuestion() {
