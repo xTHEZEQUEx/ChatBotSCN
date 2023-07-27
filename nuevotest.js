@@ -74,20 +74,19 @@ function showNextQuestion() {
     formData.append('correo', emailResponse);
     formData.append('telefono', phoneResponse);
 
-    fetch('process_data.php', {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => {
-      if (response.ok) {
-        console.log('Formulario enviado correctamente.');
-        // Aquí puedes realizar acciones adicionales si el envío del formulario fue exitoso
-      } else {
-        console.error('Error al enviar el formulario:', response.statusText);
-        // Aquí puedes manejar errores si el envío del formulario falló
+    $.ajax({
+      type:"POST",
+      url: "process_data.php",
+      data: formData,
+      processData:false,
+      contentType:false,
+      success:function(response){
+        console.log(response);
+      },
+      error: function(xhr,status,error){
+        console.error(error)
       }
     })
-    .catch(error => console.error('Error al enviar el formulario: ', error));
   }
 }
 
