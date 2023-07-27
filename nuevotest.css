@@ -113,6 +113,9 @@
     margin-top: 10px;
     float: right;
   }  
+  .campoInvisible{
+    display: none;
+  }
   .chatLogo{
     width: 20%;
     position: fixed;
