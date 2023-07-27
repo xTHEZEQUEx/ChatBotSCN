@@ -9,12 +9,47 @@
     background-color: #f0f0f0;
   } 
   .contenedorChat {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    animation: fade-in 1s ease;
-    width: 300px;
+    max-width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgb(58, 165, 96) 0%, rgb(183, 230, 108) 100%);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    right: 20px;
+    z-index: 1;
+    position: fixed;
+    bottom: 10%;
+    transition: bottom 0.3s ease-in-out;
+  }
+  .logoChat{
+    width: 20%;
+  }
+  .cabecera{
+    display: flex;
+    justify-items: start;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0px;
+  }
+  .chatSCN{
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+  }
+  .status{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .circuloVerde{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #99cc33;
+  }
+  .alerta{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
   }
   /* .contenedorChat.hidden{
     display: none;
