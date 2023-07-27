@@ -13,9 +13,9 @@ const botonChat = document.getElementById('botonChat');
 
 
 const questions = [
-  { header: '1. Escribe tu nombre:', input: nameInput },
-  { header: '2. Escribe tu correo:', input: emailInput },
-  { header: '3. Escribe tu número telefónico:', input: phoneInput }
+  { header: ' Escribe tu nombre:', input: nameInput },
+  { header: ' Escribe tu correo:', input: emailInput },
+  { header: ' Escribe tu número telefónico:', input: phoneInput }
 ];
 let currentQuestionIndex = 0;
 
