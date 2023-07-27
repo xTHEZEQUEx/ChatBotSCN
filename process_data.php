@@ -2,10 +2,10 @@
 <?php
 // Database credentials
 $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "chatbotfields";
-$table = "";
+$username = "i6990943_wp2";
+$password = "O.GuMxiINHveV6k78FM14";
+$dbname = "i6990943_wp2";
+$table = "ChatBotFields";
 
 // Establish database connection
 $conn = new mysqli($servername, $username, $password, $dbname,$table);
