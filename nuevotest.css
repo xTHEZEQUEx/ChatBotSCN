@@ -78,6 +78,14 @@
   #nextQuestionButton img {
     width: 85%;
   }
+  .preguntas{
+  
+    margin-right: 25%;
+    padding: 1.5%;
+    background-color: #58575a13;
+    border-radius: 15px;
+    margin-top: 10px;
+}
   /* .contenedorChat.hidden{
     display: none;
   } */
