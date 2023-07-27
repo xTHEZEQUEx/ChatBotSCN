@@ -17,12 +17,27 @@ const questions = [
   { header: ' Escribe tu correo 📧:', input: emailInput },
   { header: ' Escribe tu número telefónico 📞:', input: phoneInput }
 ];
+const respuestasUsuario = {
+  name: '',
+  email: '',
+  phone: ''
+}
 let currentQuestionIndex = 0;
 
 botonChat.addEventListener('click', () => {
   formContainer.classList.toggle('hidden');
 });
+function storeUserResponses() {
+  const nameResponse = nameInput.value.trim();
+  const emailResponse = emailInput.value.trim();
+  const phoneResponse = phoneInput.value.trim();
 
+  respuestasUsuario.name = nameResponse;
+  respuestasUsuario.email = emailResponse;
+  respuestasUsuario.phone = phoneResponse;
+
+  console.log('Respuestas del usuario:', 'Nombre: ', respuestasUsuario.name, 'Correo: ', respuestasUsuario.email, 'Teléfono: ', respuestasUsuario.phone);
+}
 
 function showNextQuestion() {
   if (currentQuestionIndex < questions.length) {
@@ -46,11 +61,13 @@ function showNextQuestion() {
     ;
     // Ocultar la última pregunta también
     questions[currentQuestionIndex - 1].input.classList.remove('show');
+    storeUserResponses()
   }
 }
 
+
 function goToNextQuestion() {
-  const userResponse = responsesInput.value;
+  const userResponse = responsesInput.value.trim();
   if(userResponse === ""){
     return;
   }
