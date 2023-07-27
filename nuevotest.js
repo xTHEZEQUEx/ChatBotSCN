@@ -13,9 +13,9 @@ const botonChat = document.getElementById('botonChat');
 
 
 const questions = [
-  { header: ' Escribe tu nombre:', input: nameInput },
-  { header: ' Escribe tu correo:', input: emailInput },
-  { header: ' Escribe tu número telefónico:', input: phoneInput }
+  { header: ' Escribe tu nombre 👤:', input: nameInput },
+  { header: ' Escribe tu correo 📧:', input: emailInput },
+  { header: ' Escribe tu número telefónico 📞:', input: phoneInput }
 ];
 let currentQuestionIndex = 0;
 
@@ -37,7 +37,7 @@ function showNextQuestion() {
       questions[i].input.classList.remove('show');
     }
   } else {
-    questionHeader.innerText = '¡Gracias por responder las preguntas!';
+    questionHeader.innerText = 'Gracias, nos pondremos en contacto contigo.😊';
     responsesInput.value = ''; // Limpiamos el campo de respuestas
     questionHeader.classList.add('show');
     responsesInput.classList.remove('show');
@@ -50,8 +50,40 @@ function showNextQuestion() {
 }
 
 function goToNextQuestion() {
-  questions[currentQuestionIndex].input.value = responsesInput.value;
-  console.log(`Question ${currentQuestionIndex + 1}: ${responsesInput.value}`); // Log the response
+  const userResponse = responsesInput.value;
+  if(userResponse === ""){
+    return;
+  }
+  if (currentQuestionIndex === 1 && !userResponse.includes('@')) {
+    const errorMessageElement = document.createElement('div');
+    errorMessageElement.className = 'preguntas';
+    errorMessageElement.textContent = 'Por favor, ingrese una dirección de correo electrónico válida.';
+    
+    // Get the chat-box element
+    const chatBox = document.getElementById('cajachat');
+    const divUsuario = document.querySelector('.divUsuario');
+    
+    chatBox.insertBefore(errorMessageElement, divUsuario);
+    responsesInput.value = ""; // Limpiar el campo de respuesta para que permanezca en la parte inferior
+    return; // No se avanza a la siguiente pregunta si la dirección de correo no es válida
+  }
+  questions[currentQuestionIndex].input.value = userResponse;
+  console.log(`Question ${currentQuestionIndex + 1}: ${userResponse}`); // Log the response
+
+  // Create a new element to represent the user's message
+  const userMessageElement = document.createElement('div');
+  userMessageElement.className = 'mensajesUsuario';
+  userMessageElement.textContent = userResponse;
+
+  // Get the chat-box element
+  const chatBox = document.getElementById('cajachat');
+  const divUsuario = document.querySelector('.divUsuario')
+
+  chatBox.insertBefore(userMessageElement, divUsuario);
+
+  // Append the user's message to the chat-box
+  // chatBox.appendChild(userMessageElement);
+
   currentQuestionIndex++;
   showNextQuestion();
 }
