@@ -74,7 +74,7 @@ function showNextQuestion() {
     formData.append('correo', emailResponse);
     formData.append('telefono', phoneResponse);
 
-    $.ajax({
+    $.ajax({ //Cambiar esto por jquery.ajax si algo
       type:"POST",
       url: "process_data.php",
       data: formData,
